@@ -1,0 +1,33 @@
+.map-container {
+    padding: 0px;
+}
+.map-wrapper {
+    height: 400px;
+    background: darkgray;
+    text-align: center;
+}
+
+.main-row {
+    padding: 10px;
+    background: darkslategrey;
+    margin: 15px 0px;
+}
+.restaurant-img {
+    height: 90px;
+    width: 90px;
+    object-fit: cover;
+}
+.col-one {
+    padding: 0px;
+}
+
+.restaurant-name {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+}
+.time-open-close {
+    font-size: 0.7em;
+}
+.distance {
+    font-size: 0.7em;
+}
