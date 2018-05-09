@@ -1,9 +1,11 @@
+
 .map-container {
     padding: 0px;
 }
 .map-wrapper {
+    margin-top: 15px;
     height: 400px;
-    background: darkgray;
+    background: url("../images/mapPlaceholder.png");
     text-align: center;
 }
 

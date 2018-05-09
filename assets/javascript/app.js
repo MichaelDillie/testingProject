@@ -2,15 +2,32 @@ $(document).ready(function () {
 
     var sectionContainer = $(".section-container");
 
-    function ajaxOne() {
+      function success(pos) {
+        var crd = pos.coords;
+
+        console.log("Current position is:");
+        console.log("Latitude : ${crd.latitude}");
+        console.log("Longitude: ${crd.longitude}");
+        console.log("More or less ${crd.accuracy} meters.");
+        ajaxOne(crd.latitude, crd.longitude);
+      }
+
+      function error(err) {
+        console.warn("ERROR(${err.code}): ${err.message}");
+      }
+
+      navigator.geolocation.getCurrentPosition(success, error);
+
+
+    function ajaxOne(crdLat, crdLon) {
         $.ajax({
             headers: {
                 "user-key": "465c36f62f7c99a289666a2388692476"
             },
             url: "https://developers.zomato.com/api/v2.1/locations?query=austin&count=5"
         }).then(function (response) {
-            var lat = response.location_suggestions[0].latitude;
-            var lon = response.location_suggestions[0].longitude;
+            var lat = crdLat;
+            var lon = crdLon;
             var cityId = response.location_suggestions[0].entity_id;
             // console.log("lat " + lat + " | " + "lon " + lon + " | City ID " + cityId);
             ajaxTwo(lat, lon);
@@ -32,6 +49,8 @@ $(document).ready(function () {
                 var restaurantAddressData = response.nearby_restaurants[i].restaurant.location.address;
                 var restaurantIdData = response.nearby_restaurants[i].restaurant.R.res_id;
 
+                // Fixes
+                ratingData = Math.floor(Number(ratingData));
 
                 // Creating the main row
                 var mainRow = $("<div>");
@@ -115,7 +134,6 @@ $(document).ready(function () {
             }
         })
     }
-    ajaxOne();
 
 
 });
